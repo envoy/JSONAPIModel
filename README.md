@@ -1,2 +1,2 @@
 # JSONAPIModel
-Simple JSONAPI parser and data store
+Simple JSONAPI parser / serializer and data store
