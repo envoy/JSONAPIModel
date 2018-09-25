@@ -29,3 +29,13 @@ If you expect this project to act as a full feature JSONAPI data model library, 
 
 TODO
 
+## Todos
+
+### Better parsing error report
+
+For now parsing error is not helpful at all. It could simply return a `nil`, or throw an exception. It's not handled pretty well. We should provide better parsing error report, so that we may can write these error to logs file to help troubleshooting.
+
+### Better error tolerance for invalid values
+
+Sometimes a `nil` value returned by the backend could make the parsing fail altogether. This could bring downtime to our customers if the backend is not working as expected. Although it's really hard to keep everything up and running when the given data is bad, at least maybe we can log warning message instead of crashing the app for some more common cases like nil value or missing key.
+ 
