@@ -12,14 +12,14 @@ import SwiftyJSON
 
 /// Storage for JSONAPI "included" records
 @objc
-final class JSONAPIStore: NSObject {
-    fileprivate let models: [String: JSON]
+public final class JSONAPIStore: NSObject {
+    public fileprivate let models: [String: JSON]
 
-    fileprivate static func mappingKey(type: String, id: String) -> String {
+    public fileprivate static func mappingKey(type: String, id: String) -> String {
         return "\(type)-\(id)"
     }
 
-    init(includedRecords: JSON) {
+    public init(includedRecords: JSON) {
         var models = [String: JSON]()
         for (_, json) in includedRecords {
             guard let
@@ -39,7 +39,7 @@ final class JSONAPIStore: NSObject {
     ///  - Parameters type: type of model
     ///  - Parameters id: id of model
     ///  - Returns: model for given type and id, if no model found in the store, nil will be returned
-    func get(type: String, id: String) -> JSON? {
+    public func get(type: String, id: String) -> JSON? {
         return models[JSONAPIStore.mappingKey(type: type, id: id)]
     }
 }

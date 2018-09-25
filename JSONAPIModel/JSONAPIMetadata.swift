@@ -12,8 +12,8 @@ import CocoaLumberjack
 import SwiftyJSON
 
 /// Metadata for JSON API model
-final class JSONAPIMetadata {
-    enum RelationshipType {
+public final class JSONAPIMetadata {
+    public enum RelationshipType {
         /// Has one relationship type
         case singular(
             getter: ((JSONAPIModelType) -> JSONAPIModelType?),
@@ -25,46 +25,46 @@ final class JSONAPIMetadata {
             setter: ((JSONAPIModelType, [JSONAPIModelType]) -> Void)
         )
     }
-    struct Relationship {
+    public struct Relationship {
         /// Key name in `relationships` of JSON API payload
         let key: String
         /// Type of relationship
         let type: RelationshipType
     }
 
-    let type: String
-    fileprivate(set) var relationships: [Relationship] = []
+    public let type: String
+    public fileprivate(set) var relationships: [Relationship] = []
 
-    init(type: String) {
+    public init(type: String) {
         self.type = type
     }
 
     /// Define a relationship
     ///  - Parameter relationship: relationship to add
-    func define(_ relationship: Relationship) {
+    public func define(_ relationship: Relationship) {
         relationships.append(relationship)
     }
 }
 
 /// MetadataHelper is a helper for creating JSONAPIMetadata, it does the ugly type casting for you
 /// so that you don't need to.
-struct MetadataHelper<ModelType: JSONAPIModelType> {
-    let metadata: JSONAPIMetadata
-    init(type: String) {
+public struct MetadataHelper<ModelType: JSONAPIModelType> {
+    public let metadata: JSONAPIMetadata
+    public init(type: String) {
         metadata = JSONAPIMetadata(type: type)
     }
 
     /// Define a has-one relationship
     ///  - Parameters key: key of relationship
     ///  - Parameters getter: getter function for getting relationship JSONAPIModelType object from
-    //                        model
+    ///                        model
     ///  - Parameters setter: setter function for setting relationship JSONAPIModelType object to
-    //                        model
-    func hasOne<ValueType: JSONAPIModelType>(
+    ///                        model
+    public func hasOne<ValueType: JSONAPIModelType>(
         _ key: String,
         _ getter: @escaping ((ModelType) -> ValueType?),
         _ setter: @escaping ((ModelType, ValueType?) -> Void)
-        ) {
+    ) {
         let relationship = JSONAPIMetadata.Relationship(
             key: key,
             type: .singular(
@@ -82,10 +82,10 @@ struct MetadataHelper<ModelType: JSONAPIModelType> {
     /// Define a has-many relationship
     ///  - Parameters key: key of relationship
     ///  - Parameters getter: getter function for getting relationship JSONAPIModelType object
-    //                        array from model
+    ///                        array from model
     ///  - Parameters setter: setter function for setting relationship JSONAPIModelType object
-    //                        array to model
-    func hasMany<ValueType: JSONAPIModelType>(
+    ///                        array to model
+    public func hasMany<ValueType: JSONAPIModelType>(
         _ key: String,
         _ getter: @escaping ((ModelType) -> [ValueType]),
         _ setter: @escaping ((ModelType, [ValueType]) -> Void)
@@ -106,21 +106,21 @@ struct MetadataHelper<ModelType: JSONAPIModelType> {
 }
 
 /// Attribute provides value binding between JSON with key to the left-hand-side value
-struct Attribute {
+public struct Attribute {
     /// JSON object
-    let json: JSON
+    public let json: JSON
     /// Key for reading value from the JSON object
-    let key: String
+    public let key: String
     /// Callback for collecting values
-    let collectValue: ((Any?) -> Void)?
+    public let collectValue: ((Any?) -> Void)?
 
-    init(json: JSON, key: String) {
+    public init(json: JSON, key: String) {
         self.json = json
         self.key = key
         collectValue = nil
     }
 
-    init(key: String, collectValue: @escaping ((Any?) -> Void)) {
+    public init(key: String, collectValue: @escaping ((Any?) -> Void)) {
         self.key = key
         self.collectValue = collectValue
         json = JSON([])
@@ -128,7 +128,7 @@ struct Attribute {
 
     //// Bind value between `json[keyPath]` to the left-hand-side value
     ////  - Parameters lhs: the left-hande-side value to be bound to
-    func bind<T>(_ lhs: inout T) throws {
+    public func bind<T>(_ lhs: inout T) throws {
         if collectValue != nil {
             try bindToJSON(lhs)
         } else {
@@ -138,7 +138,7 @@ struct Attribute {
 
     //// Bind value between `json[keyPath]` to the left-hand-side optional value
     ////  - Parameters lhs: the optional left-hande-side optional value to be bound to
-    func bind<T>(_ lhs: inout T?) throws {
+    public func bind<T>(_ lhs: inout T?) throws {
         if collectValue != nil {
             try bindToJSON(lhs)
         } else {
@@ -188,24 +188,24 @@ struct Attribute {
 
 /// TransformedAttribute provides value binding between JSON with key to the left-hand-side value
 /// with data transofmration
-struct TransformedAttribute<TransformType: Transform> {
+public struct TransformedAttribute<TransformType: Transform> {
     /// JSON object
-    let json: JSON
+    public let json: JSON
     /// Key for reading value from the JSON object
-    let key: String
+    public let key: String
     /// The transform to be applied on the value we get from JSON object
-    let transform: TransformType
+    public let transform: TransformType
     /// Callback for collecting values
-    let collectValue: ((Any?) -> Void)?
+    public let collectValue: ((Any?) -> Void)?
 
-    init(json: JSON, key: String, transform: TransformType) {
+    public init(json: JSON, key: String, transform: TransformType) {
         self.json = json
         self.key = key
         self.transform = transform
         collectValue = nil
     }
 
-    init(key: String, transform: TransformType, collectValue: @escaping ((Any?) -> Void)) {
+    public init(key: String, transform: TransformType, collectValue: @escaping ((Any?) -> Void)) {
         json = JSON([])
         self.key = key
         self.transform = transform
@@ -214,7 +214,7 @@ struct TransformedAttribute<TransformType: Transform> {
 
     //// Bind value between `json[keyPath]` to the left-hand-side value
     ////  - Parameters lhs: the left-hande-side value to be bound to
-    func bind<T>(_ lhs: inout T) throws {
+    public func bind<T>(_ lhs: inout T) throws {
         if collectValue != nil {
             try bindToJSON(lhs)
         } else {
@@ -224,7 +224,7 @@ struct TransformedAttribute<TransformType: Transform> {
 
     /// Bind value between `json[keyPath]` to the left-hand-side optional value
     ///  - Parameters lhs: the left-hande-side optional value to be bound to
-    func bind<T>(_ lhs: inout T?) throws {
+    public func bind<T>(_ lhs: inout T?) throws {
         if collectValue != nil {
             try bindToJSON(lhs)
         } else {
@@ -284,23 +284,23 @@ struct TransformedAttribute<TransformType: Transform> {
 
 /// JSONAPIMap provides `attribute` mapping methods for `JSONAPIModelType.mapping` method to define
 /// attribute binding
-final class JSONAPIMap {
-    static let attributesKey = "attributes"
-    enum Error: Swift.Error {
+public final class JSONAPIMap {
+    public static let attributesKey = "attributes"
+    public enum Error: Swift.Error {
         case keyError(key: String)
         case valueError(key: String)
     }
 
     /// Collected attributes for reading mode
-    private(set) var collectedAttributes: [String: Any]?
+    public private(set) var collectedAttributes: [String: Any]?
 
     private let json: JSON
 
-    init(json: JSON) {
+    public init(json: JSON) {
         self.json = json
     }
 
-    init() {
+    public init() {
         json = JSON([])
         collectedAttributes = [:]
     }
@@ -308,7 +308,7 @@ final class JSONAPIMap {
     /// Define attribute binding
     ///  - Parameters key: the key in `attributes` JSON dict for binding value from
     ///  - Returns: an Attribute object for the attribute binding
-    func attribute(_ key: String) -> Attribute {
+    public func attribute(_ key: String) -> Attribute {
         if collectedAttributes != nil {
             return Attribute(key: key) { value in
                 self.collectedAttributes![key] = value
@@ -322,7 +322,7 @@ final class JSONAPIMap {
     ///  - Parameters key: the key in `attributes` JSON dict for binding value from
     ///  - Parameters using: the TransformType to be used for transforming binding data
     ///  - Returns: an Attribute object for the attribute binding
-    func attribute<TransformType: Transform>(
+    public func attribute<TransformType: Transform>(
         _ key: String,
         using transform: TransformType
         ) -> TransformedAttribute<TransformType> {
@@ -343,20 +343,20 @@ final class JSONAPIMap {
     }
 }
 
-infix operator <-
+public infix operator <-
 
-func <- <T>(lhs: inout T, rhs: Attribute) throws {
+public func <- <T>(lhs: inout T, rhs: Attribute) throws {
     try rhs.bind(&lhs)
 }
 
-func <- <T>(lhs: inout T?, rhs: Attribute) throws {
+public func <- <T>(lhs: inout T?, rhs: Attribute) throws {
     try rhs.bind(&lhs)
 }
 
-func <- <T, TransformType: Transform>(lhs: inout T, rhs: TransformedAttribute<TransformType>) throws {
+public func <- <T, TransformType: Transform>(lhs: inout T, rhs: TransformedAttribute<TransformType>) throws {
     try rhs.bind(&lhs)
 }
 
-func <- <T, TransformType: Transform>(lhs: inout T?, rhs: TransformedAttribute<TransformType>) throws {
+public func <- <T, TransformType: Transform>(lhs: inout T?, rhs: TransformedAttribute<TransformType>) throws {
     try rhs.bind(&lhs)
 }

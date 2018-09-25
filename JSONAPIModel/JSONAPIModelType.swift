@@ -11,7 +11,7 @@ import Foundation
 import SwiftyJSON
 
 /// JSON API model type
-protocol JSONAPIModelType {
+public protocol JSONAPIModelType {
     /// JSON API metadata for defining attributes and relationships
     static var metadata: JSONAPIMetadata { get }
     /// ID of model
@@ -20,10 +20,10 @@ protocol JSONAPIModelType {
     func mapping(_ map: JSONAPIMap) throws
 }
 
-extension JSONAPIModelType {
+public extension JSONAPIModelType {
     /// Load attributes from given JSON payload into `self` model
     ///  - Parameters json: json payload to load
-    func loadAttributes(_ json: JSON) throws {
+    public func loadAttributes(_ json: JSON) throws {
         let map = JSONAPIMap(json: json)
         try mapping(map)
     }
@@ -31,7 +31,7 @@ extension JSONAPIModelType {
     /// Load relationships from given JSON payload into `self` model
     ///  - Parameters factory: factory for creating JSON API model
     ///  - Parameters json: json payload to load
-    func loadRelationships(_ factory: JSONAPIFactory, json: JSON) {
+    public func loadRelationships(_ factory: JSONAPIFactory, json: JSON) {
         let meta = Self.metadata
         let relationships = json["relationships"]
         for relationship in meta.relationships {
@@ -62,7 +62,7 @@ extension JSONAPIModelType {
     /// Load relationships from given JSON API store
     ///  - Parameters factory: factory for creating JSON API model
     ///  - Parameters store: JSON API store that contains included payload
-    func loadIncluded(_ factory: JSONAPIFactory, store: JSONAPIStore) throws {
+    public func loadIncluded(_ factory: JSONAPIFactory, store: JSONAPIStore) throws {
         let meta = Self.metadata
         // load attributtes and relationships from the data we found in store
         if let json = store.get(type: meta.type, id: id) {

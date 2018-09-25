@@ -11,11 +11,11 @@ import Foundation
 import SwiftyJSON
 
 /// JSONAPISerializer serialize given JSONAPIModelType into JSON
-struct JSONAPISerializer {
+public struct JSONAPISerializer {
     /// Serialize JSON API model into `{"data": {...}, "included": [...]}` format payload
     ///  - Parameters model: JSONAPIModelType to be serialized
     ///  - Returns: the serialized JSON API payload object
-    func serializePayload(model: JSONAPIModelType) throws -> Any {
+    public func serializePayload(model: JSONAPIModelType) throws -> Any {
         var included = [Any]()
         try collectInclude(model: model, included: &included)
         return [
@@ -27,7 +27,7 @@ struct JSONAPISerializer {
     /// Serialize JSON API model into `{"data": [...], "included": [...]}` format payload
     ///  - Parameters models: array of JSONAPIModelType to be serialized
     ///  - Returns: the serialized JSON API payload object
-    func serializePayload(models: [JSONAPIModelType]) throws -> Any {
+    public func serializePayload(models: [JSONAPIModelType]) throws -> Any {
         var included = [Any]()
         for model in models {
             try collectInclude(model: model, included: &included)
@@ -41,7 +41,7 @@ struct JSONAPISerializer {
     /// Serialize single JSON API model
     ///  - Parameters models: JSONAPIModelType to be serialized
     ///  - Returns: the serialized JSON API object
-    func serializeModel(model: JSONAPIModelType) throws -> Any {
+    public func serializeModel(model: JSONAPIModelType) throws -> Any {
         let meta = type(of: model).metadata
         let map = JSONAPIMap()
         try model.mapping(map)
@@ -91,7 +91,7 @@ struct JSONAPISerializer {
     private func serializeRelationship(
         model: JSONAPIModelType,
         relationship: JSONAPIMetadata.Relationship
-        ) -> Any? {
+    ) -> Any? {
         let result: [String: Any]
         switch relationship.type {
         case .singular(let getter, _):

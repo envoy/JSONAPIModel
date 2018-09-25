@@ -10,32 +10,32 @@ import Foundation
 
 /// Transform is an object allows you to transform given JSON value into desired format,
 /// like parsing datetime, hex color and etc
-protocol Transform {
-    associatedtype ValueType
+public protocol Transform {
+    public associatedtype ValueType
 
     /// Transform forward from given value in JSON to value in memory
     ///  - Parameters value: JSON value to be transformed
     ///  - Returns: transformed value
-    func forward(_ value: Any?) -> ValueType?
+    public func forward(_ value: Any?) -> ValueType?
 
     /// Transform backward from given value in memory to value in JSON
     ///  - Parameters value: memory value to be transformed
     ///  - Returns: transformed JSON value
-    func backward(_ value: ValueType?) -> Any?
+    public func backward(_ value: ValueType?) -> Any?
 }
 
 /// Transform for transfroming hex string color to UIColor
-struct HexColorTransform: Transform {
-    typealias ValueType = UIColor
+public struct HexColorTransform: Transform {
+    public typealias ValueType = UIColor
 
-    func forward(_ value: Any?) -> UIColor? {
+    public func forward(_ value: Any?) -> UIColor? {
         guard let hex = value as? String else {
             return nil
         }
         return UIColor(hexString: hex)
     }
 
-    func backward(_ value: UIColor?) -> Any? {
+    public func backward(_ value: UIColor?) -> Any? {
         guard let color = value else {
             return nil
         }
@@ -51,17 +51,17 @@ struct HexColorTransform: Transform {
 }
 
 /// Transform for transfroming string to NSURL
-struct URLTransform: Transform {
-    typealias ValueType = URL
+public struct URLTransform: Transform {
+    public typealias ValueType = URL
 
-    func forward(_ value: Any?) -> URL? {
+    public func forward(_ value: Any?) -> URL? {
         guard let url = value as? String else {
             return nil
         }
         return URL(string: url)
     }
 
-    func backward(_ value: ValueType?) -> Any? {
+    public func backward(_ value: ValueType?) -> Any? {
         guard let url = value else {
             return nil
         }

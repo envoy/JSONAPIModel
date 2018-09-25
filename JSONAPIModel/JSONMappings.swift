@@ -11,8 +11,8 @@ import UIKit
 
 import SwiftyJSON
 
-extension UIColor {
-    convenience init(hexString: String) {
+public extension UIColor {
+    public convenience init(hexString: String) {
         let scanner = Scanner(string: hexString)
         // bypass '#' character
         scanner.scanLocation = 1
@@ -30,10 +30,10 @@ extension UIColor {
     }
 }
 
-extension JSON {
+public extension JSON {
     /// Parsed UIColor from `self` JSON object
     ///  - Returns: an UIColor object if it's available, otherwise nil is returned
-    var hexColor: UIColor? {
+    public var hexColor: UIColor? {
         guard let hex = string else {
             return nil
         }
