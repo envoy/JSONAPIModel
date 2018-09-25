@@ -13,6 +13,9 @@ import SwiftyJSON
 /// Factory for making JSON API models
 public final class JSONAPIFactory {
     private var models: [String: JSONAPIModelType.Type] = [:]
+    
+    public init() {
+    }
 
     /// Register a model type to `self` factory
     ///  - Parameters modelType: type of model to register

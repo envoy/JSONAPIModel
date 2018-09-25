@@ -7,7 +7,9 @@
 //
 
 import XCTest
-@testable import JSONAPIModel
+
+import JSONAPIModel
+import SwiftyJSON
 
 class JSONAPIModelTests: XCTestCase {
 
@@ -18,17 +20,31 @@ class JSONAPIModelTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func readJSON(fileName: String) -> JSON {
+        let bundle = Bundle(for: type(of: self))
+        let path = bundle.path(forResource: fileName, ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+        return JSON(try! JSONSerialization.jsonObject(
+            with: data,
+            options: .allowFragments
+        ))
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testLoadJSONAPIPayloadCase0() {
+        let factory = JSONAPIFactory.defaultFactory
+        let json = readJSON(fileName: "case0")
+        do {
+            let jsonModel = try factory.createModel(json["data"])
+            guard let model = jsonModel as? ClassRoom else {
+                XCTFail()
+                return
+            }
+            XCTAssert(type(of: model) === ClassRoom.self)
+            XCTAssertEqual(model.name, "Class Room 202")
+            XCTAssertEqual(model.students.count, 0)
+        } catch {
+            XCTFail()
         }
     }
-
 }

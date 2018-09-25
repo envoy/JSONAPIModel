@@ -1,0 +1,11 @@
+{
+    "data": {
+        "type": "class-rooms",
+        "id": "class-001",
+        "attributes": {
+            "name": "Class Room 202"
+        },
+        "relationships": {
+        }
+    }
+}
