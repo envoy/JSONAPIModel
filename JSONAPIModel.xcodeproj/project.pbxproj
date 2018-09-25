@@ -10,6 +10,14 @@
 		788D5F0E215ACD3100522904 /* JSONAPIModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 788D5F04215ACD3100522904 /* JSONAPIModel.framework */; };
 		788D5F13215ACD3100522904 /* JSONAPIModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F12215ACD3100522904 /* JSONAPIModelTests.swift */; };
 		788D5F15215ACD3100522904 /* JSONAPIModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 788D5F07215ACD3100522904 /* JSONAPIModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		788D5F26215AD0CC00522904 /* JSONAPIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F1E215AD0CB00522904 /* JSONAPIFactory.swift */; };
+		788D5F27215AD0CC00522904 /* JSONAPISerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F1F215AD0CB00522904 /* JSONAPISerializer.swift */; };
+		788D5F28215AD0CC00522904 /* JSONAPIEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F20215AD0CB00522904 /* JSONAPIEncoding.swift */; };
+		788D5F29215AD0CC00522904 /* JSONMappings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F21215AD0CC00522904 /* JSONMappings.swift */; };
+		788D5F2A215AD0CC00522904 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F22215AD0CC00522904 /* Transform.swift */; };
+		788D5F2B215AD0CC00522904 /* JSONAPIMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F23215AD0CC00522904 /* JSONAPIMetadata.swift */; };
+		788D5F2C215AD0CC00522904 /* JSONAPIModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F24215AD0CC00522904 /* JSONAPIModelType.swift */; };
+		788D5F2D215AD0CC00522904 /* JSONAPIStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F25215AD0CC00522904 /* JSONAPIStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		788D5F0D215ACD3100522904 /* JSONAPIModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONAPIModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		788D5F12215ACD3100522904 /* JSONAPIModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAPIModelTests.swift; sourceTree = "<group>"; };
 		788D5F14215ACD3100522904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		788D5F1E215AD0CB00522904 /* JSONAPIFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIFactory.swift; sourceTree = "<group>"; };
+		788D5F1F215AD0CB00522904 /* JSONAPISerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPISerializer.swift; sourceTree = "<group>"; };
+		788D5F20215AD0CB00522904 /* JSONAPIEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIEncoding.swift; sourceTree = "<group>"; };
+		788D5F21215AD0CC00522904 /* JSONMappings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONMappings.swift; sourceTree = "<group>"; };
+		788D5F22215AD0CC00522904 /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		788D5F23215AD0CC00522904 /* JSONAPIMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIMetadata.swift; sourceTree = "<group>"; };
+		788D5F24215AD0CC00522904 /* JSONAPIModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIModelType.swift; sourceTree = "<group>"; };
+		788D5F25215AD0CC00522904 /* JSONAPIStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +88,14 @@
 			isa = PBXGroup;
 			children = (
 				788D5F07215ACD3100522904 /* JSONAPIModel.h */,
+				788D5F20215AD0CB00522904 /* JSONAPIEncoding.swift */,
+				788D5F1E215AD0CB00522904 /* JSONAPIFactory.swift */,
+				788D5F23215AD0CC00522904 /* JSONAPIMetadata.swift */,
+				788D5F24215AD0CC00522904 /* JSONAPIModelType.swift */,
+				788D5F1F215AD0CB00522904 /* JSONAPISerializer.swift */,
+				788D5F25215AD0CC00522904 /* JSONAPIStore.swift */,
+				788D5F21215AD0CC00522904 /* JSONMappings.swift */,
+				788D5F22215AD0CC00522904 /* Transform.swift */,
 				788D5F08215ACD3100522904 /* Info.plist */,
 			);
 			path = JSONAPIModel;
@@ -148,6 +172,7 @@
 				TargetAttributes = {
 					788D5F03215ACD3100522904 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					788D5F0C215ACD3100522904 = {
 						CreatedOnToolsVersion = 10.0;
@@ -194,6 +219,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				788D5F2C215AD0CC00522904 /* JSONAPIModelType.swift in Sources */,
+				788D5F27215AD0CC00522904 /* JSONAPISerializer.swift in Sources */,
+				788D5F26215AD0CC00522904 /* JSONAPIFactory.swift in Sources */,
+				788D5F2A215AD0CC00522904 /* Transform.swift in Sources */,
+				788D5F29215AD0CC00522904 /* JSONMappings.swift in Sources */,
+				788D5F28215AD0CC00522904 /* JSONAPIEncoding.swift in Sources */,
+				788D5F2D215AD0CC00522904 /* JSONAPIStore.swift in Sources */,
+				788D5F2B215AD0CC00522904 /* JSONAPIMetadata.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +374,7 @@
 		788D5F19215ACD3100522904 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +392,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = envoy.JSONAPIModel;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +401,7 @@
 		788D5F1A215ACD3100522904 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +427,7 @@
 		788D5F1C215ACD3100522904 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B35B3E8LE3;
 				INFOPLIST_FILE = JSONAPIModelTests/Info.plist;
@@ -409,6 +446,7 @@
 		788D5F1D215ACD3100522904 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B35B3E8LE3;
 				INFOPLIST_FILE = JSONAPIModelTests/Info.plist;
