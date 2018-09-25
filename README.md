@@ -20,6 +20,7 @@ class DeviceConfig {
 In the end, as nothing we found available, we decided to build our own, with few design goals in mind
 
  - Do not expose any JSON API relative features to the end-user of data model
+ - Keep it simple, just working as simple parser and serializer
  - It should be robust
  - Easy to use
 
