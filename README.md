@@ -174,3 +174,6 @@ For now parsing error is not helpful at all. It could simply return a `nil`, or 
 
 Sometimes a `nil` value returned by the backend could make the parsing fail altogether. This could bring downtime to our customers if the backend is not working as expected. Although it's really hard to keep everything up and running when the given data is bad, at least maybe we can log warning message instead of crashing the app for some more common cases like nil value or missing key.
  
+### More automatic tests
+
+For now we only cover pretty simple test cases, in the future we should cover more
