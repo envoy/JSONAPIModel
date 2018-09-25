@@ -16,6 +16,7 @@ extension JSONAPIFactory {
         let factory = JSONAPIFactory()
         factory.register(modelType: ClassRoom.self)
         factory.register(modelType: Student.self)
+        factory.register(modelType: Book.self)
         return factory
     }
 }

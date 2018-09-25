@@ -1,0 +1,98 @@
+{
+    "data": {
+        "type": "class-rooms",
+        "id": "class-room-001",
+        "attributes": {
+            "name": "Class Room 202"
+        },
+        "relationships": {
+            "students": {
+                "data": [
+                    {
+                        "id": "student-001",
+                        "type": "students"
+                    },
+                    {
+                        "id": "student-002",
+                        "type": "students"
+                    },
+                    {
+                        "id": "student-003",
+                        "type": "students"
+                    }
+                ]
+            }
+        }
+    },
+    "included": [
+        {
+            "id": "student-001",
+            "type": "students",
+            "attributes": {
+                "name": "John"
+            },
+            "relationships": {
+                "books": {
+                    "data": [
+                        {
+                            "id": "book-001",
+                            "type": "books"
+                        },
+                        {
+                            "id": "book-002",
+                            "type": "books"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "student-002",
+            "type": "students",
+            "attributes": {
+                "name": "Marry"
+            }
+        },
+        {
+            "id": "student-003",
+            "type": "students",
+            "attributes": {
+                "name": "Jenny"
+            },
+            "relationships": {
+                "books": {
+                    "data": [
+                        {
+                            "id": "book-003",
+                            "type": "books"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "book-001",
+            "type": "books",
+            "attributes": {
+                "name": "Head First Python",
+                "isbn": "978-1449382674"
+            }
+        },
+        {
+            "id": "book-002",
+            "type": "books",
+            "attributes": {
+                "name": "Head First Programming",
+                "isbn": "978-0596802370"
+            }
+        },
+        {
+            "id": "book-003",
+            "type": "books",
+            "attributes": {
+                "name": "Effective Modern C++",
+                "isbn": "978-1491903995"
+            }
+        }
+    ]
+}

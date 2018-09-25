@@ -1,5 +1,5 @@
 //
-//  Student.swift
+//  Class.swift
 //  JSONAPIModel-iOS
 //
 //  Created by Fang-Pen Lin on 9/25/18.
@@ -10,12 +10,10 @@ import Foundation
 
 import JSONAPIModel
 
-@objcMembers final class Student: NSObject {
+@objcMembers final class Book: NSObject {
     let id: String
     var name: String!
-    var score: Int!
-    
-    var books: [Book] = []
+    var isbn: String!
     
     init(id: String) {
         self.id = id
@@ -24,17 +22,15 @@ import JSONAPIModel
 }
 
 // MARK: JSONAPIModelType
-extension Student: JSONAPIModelType {
+extension Book: JSONAPIModelType {
     func mapping(_ map: JSONAPIMap) throws {
         try name        <- map.attribute("name")
-        try score       <- map.attribute("score")
+        try isbn        <- map.attribute("isbn")
     }
     
     static var metadata: JSONAPIMetadata {
-        let helper = MetadataHelper<Student>(type: "students")
-        helper.hasMany("books", { $0.books }, { $0.books = $1 })
+        let helper = MetadataHelper<Book>(type: "books")
         return helper.metadata
     }
 }
 
-class Foobar {}

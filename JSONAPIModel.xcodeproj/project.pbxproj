@@ -21,7 +21,8 @@
 		788D5F51215AD86300522904 /* DefaultJSONAPIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F4F215AD83100522904 /* DefaultJSONAPIFactory.swift */; };
 		788D5F52215AD86500522904 /* ClassRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F4D215AD7AA00522904 /* ClassRoom.swift */; };
 		788D5F53215AD86800522904 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F4B215AD6FB00522904 /* Student.swift */; };
-		788D5F57215ADB9700522904 /* case0.json in Resources */ = {isa = PBXBuildFile; fileRef = 788D5F55215ADA9A00522904 /* case0.json */; };
+		788D5F5A215AE26000522904 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5F59215AE26000522904 /* Book.swift */; };
+		788D5F5B215AE3D500522904 /* payload.json in Resources */ = {isa = PBXBuildFile; fileRef = 788D5F58215AE11100522904 /* payload.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,8 @@
 		788D5F4B215AD6FB00522904 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		788D5F4D215AD7AA00522904 /* ClassRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRoom.swift; sourceTree = "<group>"; };
 		788D5F4F215AD83100522904 /* DefaultJSONAPIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJSONAPIFactory.swift; sourceTree = "<group>"; };
-		788D5F55215ADA9A00522904 /* case0.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = case0.json; sourceTree = "<group>"; };
+		788D5F58215AE11100522904 /* payload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = payload.json; sourceTree = "<group>"; };
+		788D5F59215AE26000522904 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		788D5F4A215AD6CE00522904 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				788D5F59215AE26000522904 /* Book.swift */,
 				788D5F4B215AD6FB00522904 /* Student.swift */,
 				788D5F4D215AD7AA00522904 /* ClassRoom.swift */,
 				788D5F4F215AD83100522904 /* DefaultJSONAPIFactory.swift */,
@@ -142,7 +145,7 @@
 		788D5F54215ADA8500522904 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				788D5F55215ADA9A00522904 /* case0.json */,
+				788D5F58215AE11100522904 /* payload.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -246,7 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				788D5F57215ADB9700522904 /* case0.json in Resources */,
+				788D5F5B215AE3D500522904 /* payload.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +276,7 @@
 			files = (
 				788D5F52215AD86500522904 /* ClassRoom.swift in Sources */,
 				788D5F13215ACD3100522904 /* JSONAPIModelTests.swift in Sources */,
+				788D5F5A215AE26000522904 /* Book.swift in Sources */,
 				788D5F51215AD86300522904 /* DefaultJSONAPIFactory.swift in Sources */,
 				788D5F53215AD86800522904 /* Student.swift in Sources */,
 			);
