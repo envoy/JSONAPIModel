@@ -27,7 +27,70 @@ If you expect this project to act as a full feature JSONAPI data model library, 
 
 ## Example
 
-TODO
+Like we said in our design goal, we want to expose as little about JSONAPI as possible, so by design, to create a model object for JSONAPIModel, is pretty easy. Just create a class inherits from `NSObject`, and make all properties decorated with `@objc`
+
+```Swift
+import Foundation
+
+@objcMembers final class Location: NSObject {
+    /// ID of location
+    let id: String
+
+    /// Name of location
+    var name: String!
+
+    /// Employees in this location
+    var employees: [Employee]
+
+    init(id: String) {
+        self.id = id
+        super.init()
+    }
+}
+```
+
+Also, please notice that, you need to provide a constructor with `init(id: String)` signature. And all the properties other than id should all have their own default, which means you can create a JSONAPIModel object with only `id` argument
+
+```
+Location(id: "loc-12345")
+```
+
+Next, you extend the model class with `JSONAPIModelType`
+
+```
+Swift
+// MARK: JSONAPIModelType
+extension Location: JSONAPIModelType {
+    func mapping(_ map: JSONAPIMap) throws {
+        try name <- map.attribute("name")
+    }
+
+    static var metadata: JSONAPIMetadata {
+        let helper = MetadataHelper<Location>(type: "locations")
+        helper.hasMany("employees", { $0.employees }, { $0.employees = $1 })
+        return helper.metadata
+    }
+}
+```
+
+In `mapping(_ map: JSONAPIMap)` function, you can bind attributes with `<-` infix operator like this
+
+```Swift
+try name <- map.attribute("name")
+```
+
+And for relationships and the JSON API model `type`, you need to define `static var metadata: JSONAPIMetadata` like this
+
+```Swift
+static var metadata: JSONAPIMetadata {
+    let helper = MetadataHelper<Location>(type: "locations")
+    helper.hasMany("employees", { $0.employees }, { $0.employees = $1 })
+    return helper.metadata
+}
+```
+
+You can use `helper.hasMany` or `helper.hasOne` for one-to-many and one-to-one relationship. The first argument is the key in `relationships` dictionary. The second argument is the getter for getting employees value. The third argument is the setter for assigning value to employees property (an array of Employee will be given as `$1` in our example).
+
 
 ## Todos
 
