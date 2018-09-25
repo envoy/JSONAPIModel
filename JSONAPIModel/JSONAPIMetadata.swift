@@ -8,7 +8,6 @@
 
 import Foundation
 
-import CocoaLumberjack
 import SwiftyJSON
 
 /// Metadata for JSON API model
@@ -160,11 +159,9 @@ public struct Attribute {
     private func bindFromJSON<T>(_ lhs: inout T) throws {
         let jsonValue = json[key]
         guard jsonValue.exists() else {
-            DDLogError("Failed to bind value from \(json) @ \(key), key doesn't exist")
             throw JSONAPIMap.Error.keyError(key: key)
         }
         guard let value = jsonValue.object as? T else {
-            DDLogError("Failed to bind value from \(json) @ \(key), bad value type")
             throw JSONAPIMap.Error.valueError(key: key)
         }
         lhs = value
@@ -237,7 +234,6 @@ public struct TransformedAttribute<TransformType: Transform> {
             let value = lhs as? TransformType.ValueType,
             let transformed = transform.backward(value)
             else {
-                DDLogError("Failed to bind value to \(key), bad value type")
                 throw JSONAPIMap.Error.valueError(key: key)
         }
         collectValue!(transformed)
@@ -256,11 +252,9 @@ public struct TransformedAttribute<TransformType: Transform> {
     private func bindFromJSON<T>(_ lhs: inout T) throws {
         let jsonValue = json[key]
         guard jsonValue.exists() else {
-            DDLogError("Failed to bind value from \(json) @ \(key), key doesn't exist")
             throw JSONAPIMap.Error.keyError(key: key)
         }
         guard let value = transform.forward(jsonValue.object) as? T else {
-            DDLogError("Failed to bind value from \(json) @ \(key), bad value type")
             throw JSONAPIMap.Error.valueError(key: key)
         }
         lhs = value
@@ -343,7 +337,7 @@ public final class JSONAPIMap {
     }
 }
 
-public infix operator <-
+infix operator <-
 
 public func <- <T>(lhs: inout T, rhs: Attribute) throws {
     try rhs.bind(&lhs)

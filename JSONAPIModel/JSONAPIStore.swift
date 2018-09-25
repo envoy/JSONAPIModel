@@ -13,9 +13,9 @@ import SwiftyJSON
 /// Storage for JSONAPI "included" records
 @objc
 public final class JSONAPIStore: NSObject {
-    public fileprivate let models: [String: JSON]
+    fileprivate let models: [String: JSON]
 
-    public fileprivate static func mappingKey(type: String, id: String) -> String {
+    fileprivate static func mappingKey(type: String, id: String) -> String {
         return "\(type)-\(id)"
     }
 

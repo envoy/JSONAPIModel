@@ -7,21 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 /// Transform is an object allows you to transform given JSON value into desired format,
 /// like parsing datetime, hex color and etc
 public protocol Transform {
-    public associatedtype ValueType
+    associatedtype ValueType
 
     /// Transform forward from given value in JSON to value in memory
     ///  - Parameters value: JSON value to be transformed
     ///  - Returns: transformed value
-    public func forward(_ value: Any?) -> ValueType?
+    func forward(_ value: Any?) -> ValueType?
 
     /// Transform backward from given value in memory to value in JSON
     ///  - Parameters value: memory value to be transformed
     ///  - Returns: transformed JSON value
-    public func backward(_ value: ValueType?) -> Any?
+    func backward(_ value: ValueType?) -> Any?
 }
 
 /// Transform for transfroming hex string color to UIColor
