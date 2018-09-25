@@ -41,7 +41,7 @@ import Foundation
     var name: String!
 
     /// Employees in this location
-    var employees: [Employee]
+    var employees: [Employee] = []
 
     init(id: String) {
         self.id = id
@@ -50,7 +50,7 @@ import Foundation
 }
 ```
 
-Also, please notice that, you need to provide a constructor with `init(id: String)` signature. And all the properties other than id should all have their own default, which means you can create a JSONAPIModel object with only `id` argument
+Also, please notice that, you need to provide a constructor with `init(id: String)` signature. And all the properties other than id should all have their own default value (that's why we using implicit unwrapping optional for `name` here, and assign initial value for `employees`), which means you can create this JSONAPIModel object with only `id` argument
 
 ```Swift
 Location(id: "loc-12345")
