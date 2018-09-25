@@ -127,6 +127,10 @@ extension Employee: JSONAPIModelType {
 
 ## Todos
 
+### Provider helper for loading data and data array with included
+
+For now loading data is pretty much manual process. You need to get JSON object from `data` key and feed it into JSONAPIModel, then get `included` and create a store, then call `loadIncluded` on the object you create. In the future maybe it makes more sense to provide a helper doing it altogether for the user.
+
 ### Better parsing error report
 
 For now parsing error is not helpful at all. It could simply return a `nil`, or throw an exception. It's not handled pretty well. We should provide better parsing error report, so that we may can write these error to logs file to help troubleshooting.
