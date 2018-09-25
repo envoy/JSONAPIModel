@@ -88,8 +88,42 @@ static var metadata: JSONAPIMetadata {
 }
 ```
 
-You can use `helper.hasMany` or `helper.hasOne` for one-to-many and one-to-one relationship. The first argument is the key in `relationships` dictionary. The second argument is the getter for getting employees value. The third argument is the setter for assigning value to employees property (an array of Employee will be given as `$1` in our example).
+The `MetadataHelper<Location>(type: "locations")` here creates a meatadata helper for this `Location` model, with `locations` as the JSON API model `type`.
 
+Next, you can use `helper.hasMany` or `helper.hasOne` for one-to-many and one-to-one relationship. The first argument is the key in `relationships` dictionary. The second argument is the getter for getting employees value. The third argument is the setter for assigning value to employees property (an array of Employee will be given as `$1` in our example).
+
+Finally, you return the metadata from the helper.
+
+Likewise, you can define another model `Employee` like this
+
+```Swift
+import Foundation
+
+/// Employee info
+final class Employee: NSObject {
+    /// ID of Employee
+    let id: String
+    /// Name of employee
+    @objc var name: String!
+
+    init(id: String) {
+        self.id = id
+        super.init()
+    }
+}
+
+// MARK: JSONAPIModelType
+extension Employee: JSONAPIModelType {
+    func mapping(_ map: JSONAPIMap) throws {
+        try name <- map.attribute("name")
+    }
+
+    static var metadata: JSONAPIMetadata {
+        let helper = MetadataHelper<Employee>(type: "employees")
+        return helper.metadata
+    }
+}
+```
 
 ## Todos
 
