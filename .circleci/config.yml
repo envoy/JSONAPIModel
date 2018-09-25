@@ -13,10 +13,9 @@ jobs:
     steps:
       - checkout
 
-      # Install CocoaPods
       - run:
-          name: Install CocoaPods
-          command: pod install
+          name: Checkout Dependencies with Carthahge
+          command: carthage bootstrap
 
       # Build the app and run tests
       - run:
@@ -30,5 +29,5 @@ jobs:
             LC_CTYPE: en_US.UTF-8
             LANG: en_US.UTF-8
             WORKSPACE: JSONAPIModel.xcworkspace
-            IOS_FRAMEWORK_SCHEME: "JSONAPIModel-iOS"
-            IOS_SDK: iphonesimulator12.0
+            SCHEME: JSONAPIModel-iOS
+            SDK: iphonesimulator12.0
