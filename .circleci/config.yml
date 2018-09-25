@@ -8,7 +8,7 @@ jobs:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "10.0"
+      xcode: "10.0.0"
 
     steps:
       - checkout
@@ -21,19 +21,14 @@ jobs:
       # Build the app and run tests
       - run:
           name: Build and run tests
-          command: fastlane scan
+          command: >
+            set -o pipefail &&
+            xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK"
+            -destination "$DESTINATION" -configuration Debug
+            ONLY_ACTIVE_ARCH=NO test | xcpretty -c;
           environment:
-            SCAN_DEVICE: iPhone 6
-            SCAN_SCHEME: WebTests
-
-      # Collect XML test results data to show in the UI,
-      # and save the same XML files under test-results folder
-      # in the Artifacts tab
-      - store_test_results:
-          path: test_output/report.xml
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: scan-test-results
-      - store_artifacts:
-          path: ~/Library/Logs/scan
-          destination: scan-logs
+            LC_CTYPE: en_US.UTF-8
+            LANG: en_US.UTF-8
+            WORKSPACE: JSONAPIModel.xcworkspace
+            IOS_FRAMEWORK_SCHEME: "JSONAPIModel-iOS"
+            IOS_SDK: iphonesimulator12.0
