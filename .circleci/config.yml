@@ -31,3 +31,4 @@ jobs:
             WORKSPACE: JSONAPIModel.xcworkspace
             SCHEME: JSONAPIModel-iOS
             SDK: iphonesimulator12.0
+            DESTINATION: "OS=12.0,name=iPhone XS"
