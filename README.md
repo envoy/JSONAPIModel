@@ -125,6 +125,40 @@ extension Employee: JSONAPIModelType {
 }
 ```
 
+Now we have a pretty simple JSON API model, we need to register our model classes with `JSONAPIFactory`, you can do it like this
+
+```Swift
+import JSONAPIModel
+
+extension JSONAPIFactory {
+    /// Default factory that registered with all models
+    static var defaultFactory: JSONAPIFactory {
+        let factory = JSONAPIFactory()
+        factory.register(modelType: Location.self)
+        factory.register(modelType: Employee.self)
+        return factory
+    }
+}
+```
+
+Then to load data from JSON, you can write
+
+```Swift
+import SwiftyJSON
+import JSONAPIModel
+
+let factory = JSONAPIFactory.defaultFactory
+let json = try JSON(data: data)
+let result = try factory.createModel(json["data"])
+guard let location = result as? Location else {
+    return
+}
+let store = JSONAPIStore(includedRecords: json["included"])
+try location.loadIncluded(factory, store: store)
+```
+
+The `factory.createModel` loads the JSON data from `data` key. Next, we load the included objects into `JSONAPIStore`. Finally call `location.loadIncluded(factory, store: store)` to make the location object load all these included objects.
+
 ## Todos
 
 ### Provider helper for loading data and data array with included
