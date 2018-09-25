@@ -51,14 +51,13 @@ import Foundation
 
 Also, please notice that, you need to provide a constructor with `init(id: String)` signature. And all the properties other than id should all have their own default, which means you can create a JSONAPIModel object with only `id` argument
 
-```
+```Swift
 Location(id: "loc-12345")
 ```
 
 Next, you extend the model class with `JSONAPIModelType`
 
-```
-Swift
+```Swift
 // MARK: JSONAPIModelType
 extension Location: JSONAPIModelType {
     func mapping(_ map: JSONAPIMap) throws {
