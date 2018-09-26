@@ -160,6 +160,24 @@ try location.loadIncluded(factory, store: store)
 
 The `factory.createModel` loads the JSON data from `data` key. Next, we load the included objects into `JSONAPIStore`. Finally call `location.loadIncluded(factory, store: store)` to make the location object load all these included objects.
 
+## Install
+
+### CocoaPods
+
+To install with CocoaPod, add Embassy to your Podfile:
+
+```
+pod 'JSONAPIModel', '~> 1.0'
+```
+
+### Carthage
+
+To install with Carthage, add Embassy to your Cartfile:
+
+```
+github "envoy/JSONAPIModel" ~> 4.0
+```
+
 ## Todos
 
 ### Provider helper for loading data and data array with included
