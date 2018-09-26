@@ -28,6 +28,9 @@ public protocol Transform {
 /// Transform for transfroming hex string color to UIColor
 public struct HexColorTransform: Transform {
     public typealias ValueType = UIColor
+    
+    public init() {
+    }
 
     public func forward(_ value: Any?) -> UIColor? {
         guard let hex = value as? String else {
@@ -54,6 +57,9 @@ public struct HexColorTransform: Transform {
 /// Transform for transfroming string to NSURL
 public struct URLTransform: Transform {
     public typealias ValueType = URL
+    
+    public init() {
+    }
 
     public func forward(_ value: Any?) -> URL? {
         guard let url = value as? String else {

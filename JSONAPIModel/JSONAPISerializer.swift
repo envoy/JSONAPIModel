@@ -12,6 +12,9 @@ import SwiftyJSON
 
 /// JSONAPISerializer serialize given JSONAPIModelType into JSON
 public struct JSONAPISerializer {
+    public init() {
+    }
+    
     /// Serialize JSON API model into `{"data": {...}, "included": [...]}` format payload
     ///  - Parameters model: JSONAPIModelType to be serialized
     ///  - Returns: the serialized JSON API payload object
