@@ -13,5 +13,5 @@ Pod::Spec.new do |spec|
     tag: "v#{spec.version}"
   }
   spec.source_files = 'JSONAPIModel/*.swift', 'JSONAPIModel/**/*.swift'
-  spec.dependency 'SwiftyJSON', '~> 4.0'
+  spec.dependency 'SwiftyJSON', '~> 5.0'
 end
