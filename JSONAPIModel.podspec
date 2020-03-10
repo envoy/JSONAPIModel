@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'JSONAPIModel'
-  spec.version      = '1.0.3'
+  spec.version      = '1.1.0'
   spec.summary      = 'Simple JSONAPI parser / serializer and data model'
   spec.homepage     = 'https://github.com/envoy/JSONAPIModel'
   spec.license      = 'MIT'
