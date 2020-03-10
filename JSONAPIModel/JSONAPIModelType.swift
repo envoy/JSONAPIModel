@@ -23,7 +23,7 @@ public protocol JSONAPIModelType {
 public extension JSONAPIModelType {
     /// Load attributes from given JSON payload into `self` model
     ///  - Parameters json: json payload to load
-    public func loadAttributes(_ json: JSON) throws {
+    func loadAttributes(_ json: JSON) throws {
         let map = JSONAPIMap(json: json)
         try mapping(map)
     }
@@ -31,7 +31,7 @@ public extension JSONAPIModelType {
     /// Load relationships from given JSON payload into `self` model
     ///  - Parameters factory: factory for creating JSON API model
     ///  - Parameters json: json payload to load
-    public func loadRelationships(_ factory: JSONAPIFactory, json: JSON) {
+    func loadRelationships(_ factory: JSONAPIFactory, json: JSON) {
         let meta = Self.metadata
         let relationships = json["relationships"]
         for relationship in meta.relationships {
@@ -62,7 +62,7 @@ public extension JSONAPIModelType {
     /// Load relationships from given JSON API store
     ///  - Parameters factory: factory for creating JSON API model
     ///  - Parameters store: JSON API store that contains included payload
-    public func loadIncluded(_ factory: JSONAPIFactory, store: JSONAPIStore) throws {
+    func loadIncluded(_ factory: JSONAPIFactory, store: JSONAPIStore) throws {
         let meta = Self.metadata
         // load attributtes and relationships from the data we found in store
         if let json = store.get(type: meta.type, id: id) {

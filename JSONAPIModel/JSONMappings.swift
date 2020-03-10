@@ -12,7 +12,7 @@ import UIKit
 import SwiftyJSON
 
 public extension UIColor {
-    public convenience init(hexString: String) {
+    convenience init(hexString: String) {
         let scanner = Scanner(string: hexString)
         // bypass '#' character
         scanner.scanLocation = 1
@@ -33,7 +33,7 @@ public extension UIColor {
 public extension JSON {
     /// Parsed UIColor from `self` JSON object
     ///  - Returns: an UIColor object if it's available, otherwise nil is returned
-    public var hexColor: UIColor? {
+    var hexColor: UIColor? {
         guard let hex = string else {
             return nil
         }
