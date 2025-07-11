@@ -10,6 +10,7 @@ import XCTest
 
 import JSONAPIModel
 import SwiftyJSON
+@testable import JSONAPIModel
 
 class JSONAPIModelTests: XCTestCase {
 
@@ -22,8 +23,6 @@ class JSONAPIModelTests: XCTestCase {
     }
 
     func readJSON(fileName: String) -> JSON {
-        let test = Bundle.module.bundlePath
-        print(test)
         let path = Bundle.module.path(forResource: fileName, ofType: "json")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
         return JSON(try! JSONSerialization.jsonObject(
@@ -126,6 +125,61 @@ class JSONAPIModelTests: XCTestCase {
             XCTAssertEqual(thirdBook.isbn, "978-1491903995")
         } catch {
             XCTFail()
+        }
+    }
+
+    func testLoadIncludedIterativeSafeWithArticles() {
+        let factory = JSONAPIFactory.defaultFactory
+        let json = readJSON(fileName: "articles")
+        do {
+            let jsonModel = try factory.createModel(json["data"][0])
+            guard let article = jsonModel as? Article else {
+                XCTFail("Should create Article model")
+                return
+            }
+
+            // Verify basic article attributes
+            XCTAssertEqual(article.id, "1")
+            XCTAssertEqual(article.title, "JSON:API paints my bikeshed!")
+
+            // Create store and load included data using safe iterative approach
+            let store = JSONAPIStore(includedRecords: json["included"])
+            try jsonModel?.loadIncludedIterative(factory, store: store)
+
+            // Verify author relationship is loaded
+            XCTAssertNotNil(article.author)
+            XCTAssertEqual(article.author?.id, "9")
+            XCTAssertEqual(article.author?.firstName, "Dan")
+            XCTAssertEqual(article.author?.lastName, "Gebhardt")
+            XCTAssertEqual(article.author?.twitter, "dgeb")
+
+            // Verify comments relationship is loaded
+            XCTAssertEqual(article.comments.count, 2)
+
+            let firstComment = article.comments[0]
+            XCTAssertEqual(firstComment.id, "5")
+            XCTAssertEqual(firstComment.body, "First!")
+
+            let secondComment = article.comments[1]
+            XCTAssertEqual(secondComment.id, "12")
+            XCTAssertEqual(secondComment.body, "I like XML better")
+            XCTAssertNotNil(secondComment.author)
+            XCTAssertEqual(secondComment.author?.id, "9")
+            XCTAssertEqual(secondComment.author?.firstName, "Dan")
+
+            // **CRITICAL TEST**: Both the article author and comment author should have the same Id, but should be different instances
+            // This prevents duplicate objects and potential retain cycles
+            if let articleAuthor = article.author,
+               let commentAuthor = secondComment.author,
+               articleAuthor.id == commentAuthor.id {
+                XCTAssertTrue(articleAuthor !== commentAuthor,
+                             "Article author and comment author should NOT be the same instance to prevent duplicates and retain cycles")
+            } else {
+                XCTFail("Both authors should be non-nil")
+            }
+
+        } catch {
+            XCTFail("Test failed with error: \(error)")
         }
     }
 }
