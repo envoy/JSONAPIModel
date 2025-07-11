@@ -14,9 +14,9 @@ import JSONAPIModel
     let id: String
     var name: String!
     var score: Int!
-    
+
     var books: [Book] = []
-    
+
     init(id: String) {
         self.id = id
         super.init()
@@ -29,7 +29,7 @@ extension Student: JSONAPIModelType {
         try name        <- map.attribute("name")
         try score       <- map.attribute("score")
     }
-    
+
     static var metadata: JSONAPIMetadata {
         let helper = MetadataHelper<Student>(type: "students")
         helper.hasMany("books", { $0.books }, { $0.books = $1 })

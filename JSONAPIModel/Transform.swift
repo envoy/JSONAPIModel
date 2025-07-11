@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 /// Transform is an object allows you to transform given JSON value into desired format,
 /// like parsing datetime, hex color and etc
@@ -25,10 +24,34 @@ public protocol Transform {
     func backward(_ value: ValueType?) -> Any?
 }
 
+/// Transform for transfroming string to NSURL
+public struct URLTransform: Transform {
+    public typealias ValueType = URL
+
+    public init() {
+    }
+
+    public func forward(_ value: Any?) -> URL? {
+        guard let url = value as? String else {
+            return nil
+        }
+        return URL(string: url)
+    }
+
+    public func backward(_ value: ValueType?) -> Any? {
+        guard let url = value else {
+            return nil
+        }
+        return url.absoluteString
+    }
+}
+
+#if canImport(UIKit)
+import UIKit
 /// Transform for transfroming hex string color to UIColor
 public struct HexColorTransform: Transform {
     public typealias ValueType = UIColor
-    
+
     public init() {
     }
 
@@ -53,25 +76,4 @@ public struct HexColorTransform: Transform {
     }
 
 }
-
-/// Transform for transfroming string to NSURL
-public struct URLTransform: Transform {
-    public typealias ValueType = URL
-    
-    public init() {
-    }
-
-    public func forward(_ value: Any?) -> URL? {
-        guard let url = value as? String else {
-            return nil
-        }
-        return URL(string: url)
-    }
-
-    public func backward(_ value: ValueType?) -> Any? {
-        guard let url = value else {
-            return nil
-        }
-        return url.absoluteString
-    }
-}
+#endif

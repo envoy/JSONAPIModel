@@ -14,7 +14,7 @@ import JSONAPIModel
     let id: String
     var name: String!
     var isbn: String!
-    
+
     init(id: String) {
         self.id = id
         super.init()
@@ -27,7 +27,7 @@ extension Book: JSONAPIModelType {
         try name        <- map.attribute("name")
         try isbn        <- map.attribute("isbn")
     }
-    
+
     static var metadata: JSONAPIMetadata {
         let helper = MetadataHelper<Book>(type: "books")
         return helper.metadata

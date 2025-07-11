@@ -17,6 +17,9 @@ extension JSONAPIFactory {
         factory.register(modelType: ClassRoom.self)
         factory.register(modelType: Student.self)
         factory.register(modelType: Book.self)
+        factory.register(modelType: Article.self)
+        factory.register(modelType: Person.self)
+        factory.register(modelType: Comment.self)
         return factory
     }
 }
