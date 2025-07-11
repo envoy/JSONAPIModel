@@ -6,10 +6,10 @@
 //  Copyright © 2016 Envoy Inc. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
 import SwiftyJSON
+
+#if canImport(UIKit)
+import UIKit
 
 public extension UIColor {
     convenience init(hexString: String) {
@@ -40,3 +40,4 @@ public extension JSON {
         return UIColor(hexString: hex)
     }
 }
+#endif
