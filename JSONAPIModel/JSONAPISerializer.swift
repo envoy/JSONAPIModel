@@ -7,13 +7,11 @@
 //
 
 import Foundation
-
 import SwiftyJSON
 
 /// JSONAPISerializer serialize given JSONAPIModelType into JSON
 public struct JSONAPISerializer {
-    public init() {
-    }
+    public init() {}
     
     /// Serialize JSON API model into `{"data": {...}, "included": [...]}` format payload
     ///  - Parameters model: JSONAPIModelType to be serialized
@@ -54,7 +52,7 @@ public struct JSONAPISerializer {
             "type": meta.type
         ]
 
-        if let attributes = map.collectedAttributes, attributes.count > 0 {
+        if let attributes = map.collectedAttributes, !attributes.isEmpty {
             dict["attributes"] = attributes
         }
 
@@ -65,7 +63,7 @@ public struct JSONAPISerializer {
             }
             relationships[relationship.key] = value
         }
-        if relationships.count > 0 {
+        if !relationships.isEmpty {
             dict["relationships"] = relationships
         }
         return dict
