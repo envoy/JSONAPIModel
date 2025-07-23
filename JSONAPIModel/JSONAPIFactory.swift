@@ -69,6 +69,7 @@ public final class JSONAPIFactory: Collection {
         guard let model = createModel(id: id, type: modelType) else {
             return nil
         }
+
         try model.loadAttributes(json)
         model.loadRelationships(self, json: json)
         return model
