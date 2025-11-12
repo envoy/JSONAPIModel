@@ -23,7 +23,17 @@ public final class JSONAPIStore: NSObject, Collection {
         return "\(type)-\(id)"
     }
 
-    public init(includedRecords: JSON) {
+    public convenience init(data: Data, options: JSONSerialization.ReadingOptions = []) throws {
+        let json = try JSON(data: data, options: options)
+        self.init(includedRecords: json)
+    }
+
+    public convenience init(object: Any) throws {
+        let json = JSON(object)
+        self.init(includedRecords: json)
+    }
+
+    internal init(includedRecords: JSON) {
         var models = [String: JSON]()
         for (_, json) in includedRecords {
             guard let
@@ -63,7 +73,7 @@ public final class JSONAPIStore: NSObject, Collection {
     ///  - Parameters type: type of model
     ///  - Parameters id: id of model
     ///  - Returns: model for given type and id, if no model found in the store, nil will be returned
-    public func get(type: String, id: String) -> JSON? {
+    internal func get(type: String, id: String) -> JSON? {
         return models[JSONAPIStore.mappingKey(type: type, id: id)]
     }
 }

@@ -30,7 +30,7 @@ public extension UIColor {
     }
 }
 
-public extension JSON {
+internal extension JSON {
     /// Parsed UIColor from `self` JSON object
     ///  - Returns: an UIColor object if it's available, otherwise nil is returned
     var hexColor: UIColor? {

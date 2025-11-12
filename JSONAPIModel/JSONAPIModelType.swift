@@ -20,10 +20,15 @@ public protocol JSONAPIModelType {
 }
 
 extension JSONAPIModelType {
+    public func loadAttributes(data: Data, options: JSONSerialization.ReadingOptions = []) throws {
+        let json = try JSON(data: data, options: options)
+        try loadAttributes(json)
+    }
+
     /// Load attributes from given JSON payload into `self` model
     ///  - Parameters json: json payload to load
-    public func loadAttributes(_ json: JSON) throws {
-        let map = JSONAPIMap(json: json)
+    internal func loadAttributes(_ json: JSON) throws {
+        let map = JSONAPIMap(json)
         try mapping(map)
     }
 
