@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "JSONAPIModel",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v15),
         .macOS(.v10_14),
         .tvOS(.v12),
     ],
