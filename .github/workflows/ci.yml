@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Carthage bootstrap
-        run: carthage bootstrap --platform iOS --use-xcframeworks
+        run: carthage bootstrap --no-build
       - name: Build and run tests
         run: >
           set -o pipefail &&
