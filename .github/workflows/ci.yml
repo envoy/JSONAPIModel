@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v5
+      # Test the Swift package (Package.swift). The legacy Carthage/xcworkspace
+      # setup no longer builds: the Xcode project is missing sources and the
+      # tests rely on SwiftPM's Bundle.module.
+      - name: Build and run tests (iOS Simulator)
+        run: >
+          set -o pipefail &&
+          xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme JSONAPIModel
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest'
+          -configuration Debug test | xcbeautify
